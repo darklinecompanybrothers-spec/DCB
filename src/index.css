@@ -1,0 +1,555 @@
+/* ─── Fonts loaded via <link> in index.html (Fontshare CDN) ────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base reset ────────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+/* scroll-behavior: smooth removed — Lenis handles smooth scrolling via JS */
+
+body {
+  font-family: 'Neue Montreal', 'Inter', system-ui, -apple-system, sans-serif;
+  background: #050508;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal swipe rubber-band without breaking Lenis vertical scroll */
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+}
+
+.site-root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+/* ─── TheTrinityReel: Equalizer bar pulse ──────────────────────────────────── */
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(1);    opacity: 1;   }
+  50%       { transform: scaleY(0.18); opacity: 0.6; }
+}
+
+/* ─── Hero: Floating card animation ────────────────────────────────────────── */
+@keyframes heroCardFloat {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-14px); }
+  100% { transform: translateY(0px); }
+}
+
+.hero-card-float {
+  animation: heroCardFloat 5s ease-in-out infinite;
+}
+
+/* Mouse tilt overrides the translate temporarily — handled via JS inline style,
+   the translateY from the animation will compose nicely because we separate
+   the float wrapper from the tilt target via nesting. */
+
+/* ─── Hero: Ambient orb drifting animations ─────────────────────────────────── */
+@keyframes orbDrift1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(40px, -30px) scale(1.05); }
+  66%  { transform: translate(-20px, 20px) scale(0.97); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbDrift2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(-30px, 25px) scale(1.06); }
+  75%  { transform: translate(20px, -15px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes orbDrift3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(25px, 20px) scale(1.04); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.hero-orb-1 {
+  animation: orbDrift1 18s ease-in-out infinite;
+}
+
+.hero-orb-2 {
+  animation: orbDrift2 22s ease-in-out infinite;
+}
+
+.hero-orb-3 {
+  animation: orbDrift3 15s ease-in-out infinite;
+}
+
+/* ─── Stat badge: gentle float ──────────────────────────────────────────────── */
+@keyframes badgeFloat {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.hero-float-badge {
+  animation: badgeFloat 4s ease-in-out infinite;
+}
+
+/* ─── Existing utility animations (kept from original) ──────────────────────── */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2000ms;
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes electric-flicker {
+  0%, 100% { opacity: 1; text-shadow: 0 0 8px rgba(139, 92, 246, 0.6), 0 0 15px rgba(6, 182, 212, 0.4); }
+  3% { opacity: 0.8; text-shadow: none; }
+  6% { opacity: 1; text-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+  7% { opacity: 0.4; text-shadow: none; }
+  8% { opacity: 1; text-shadow: 0 0 15px rgba(6, 182, 212, 0.6); }
+  9% { opacity: 1; text-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+  10% { opacity: 0.9; }
+  50% { opacity: 1; text-shadow: 0 0 8px rgba(139, 92, 246, 0.6), 0 0 15px rgba(6, 182, 212, 0.4); }
+}
+
+.logo-electric {
+  animation: electric-flicker 5s infinite;
+}
+
+/* ─── Scrollbar styling — WebKit + Firefox ──────────────────────────────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(138, 43, 226, 0.5) transparent;
+}
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(138, 43, 226, 0.45);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.75);
+}
+@media (max-width: 768px) {
+  ::-webkit-scrollbar { width: 0; }
+  html { scrollbar-width: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PHASE 2 — GLOBAL DESIGN SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Typography — titres de sections ──────────────────────────────────────── */
+
+/* Tous les <h2> et <h3> du site adoptent Neue Montreal automatiquement */
+.site-root h1,
+.site-root h2,
+.site-root h3 {
+  font-family: 'Neue Montreal', 'Inter', system-ui, sans-serif;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+/* Classe utilitaire : titre de section premium */
+.section-title {
+  font-family: 'Neue Montreal', 'Inter', system-ui, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+/* Classe utilitaire : titre display monumental (Clash Display — H1 hero uniquement) */
+.display-title {
+  font-family: 'Clash Display', 'Editorial New', serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.90;
+  font-feature-settings: 'liga' 1, 'kern' 1;
+  overflow-wrap: anywhere;
+}
+
+/* Dégradé de texte violet → cyan */
+.text-gradient {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Texte outline (stroke) */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.55);
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Glassmorphism — classes utilitaires ──────────────────────────────────── */
+
+/* Carte/conteneur standard */
+.glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+}
+
+/* Variante avec lueur violette au hover */
+.glass-card-hover {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+.glass-card-hover:hover {
+  border-color: rgba(138, 43, 226, 0.25);
+  box-shadow: 0 0 40px rgba(138, 43, 226, 0.07), 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Pill / badge glassmorphism */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px;
+}
+
+/* ─── Sections — espacement global ────────────────────────────────────────── */
+
+/* Chaque section du site reçoit un padding vertical généreux */
+.site-root section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  position: relative;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+@media (min-width: 768px) {
+  .site-root section {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+/* Ligne séparatrice fine entre les sections */
+.site-root section + section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(800px, 80%);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.055), transparent);
+  pointer-events: none;
+}
+
+/* Fade-in depuis le bas — appliqué via JS (useScrollReveal), conservé comme base CSS */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.section-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Padding top complémentaire pour la première section (sous la navbar flottante) */
+.site-root > div > section:first-of-type {
+  padding-top: 5rem;
+}
+
+/* ─── Labels de section (overline au-dessus du titre) ─────────────────────── */
+.section-overline {
+  font-family: 'Neue Montreal', 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(192, 132, 252, 0.92); /* was 0.7 — bumped to pass WCAG AA 4.5:1 on dark bg */
+}
+
+@media (max-width: 640px) {
+  .site-root section {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .site-root h1,
+  .site-root h2,
+  .site-root h3,
+  .section-title,
+  .display-title {
+    letter-spacing: 0;
+  }
+
+  .section-title {
+    font-size: clamp(2.25rem, 11vw, 3.5rem);
+    line-height: 0.98;
+  }
+
+  .section-overline {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+}
+
+/* ─── Séparateur accent violet ────────────────────────────────────────────── */
+.accent-line {
+  height: 1px;
+  width: 48px;
+  background: linear-gradient(90deg, rgba(138, 43, 226, 0.8), transparent);
+  border: none;
+}
+
+/* ─── Fond de section transparent (toutes les sections héritent du bg global) */
+.site-root section {
+  background: transparent;
+}
+
+/* Override : sections qui avaient bg-neutral-950 explicite */
+.site-root .bg-neutral-950 {
+  background: transparent !important;
+}
+
+/* ─── Neon text-shadow utilitaire ─────────────────────────────────────────── */
+.neon-purple {
+  text-shadow: 0 0 16px rgba(138, 43, 226, 0.6), 0 0 32px rgba(138, 43, 226, 0.25);
+}
+.neon-cyan {
+  text-shadow: 0 0 16px rgba(0, 212, 255, 0.5), 0 0 32px rgba(0, 212, 255, 0.2);
+}
+
+/* Hide native cursor only when the custom cursor component is active. */
+@media (pointer: fine) {
+  .custom-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
+/* ─── Accessibility: Focus-visible rings ────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.75);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Skip link — invisible until focused by keyboard */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.5rem 1.25rem;
+  background: #8b5cf6;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: top 0.2s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ─── Performance: prefers-reduced-motion ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  /*
+   * Universal halt — covers ALL CSS @keyframe animations (including inline
+   * animation: styles applied by JS, e.g. eq-bar, gradient-shift) and CSS
+   * transitions. !important beats non-!important inline styles per CSS cascade.
+   * Transition-duration kept at 0.15s so hover/focus state changes remain
+   * perceptible (colour / opacity micro-interactions are not vestibular risk).
+   */
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.15s  !important;
+    transition-delay:          0ms    !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  /* Explicit pause for elements that use will-change / GPU layers */
+  .star-layer-1,
+  .star-layer-2,
+  .star-layer-3,
+  .hero-orb-1,
+  .hero-orb-2,
+  .hero-orb-3 {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Performance mode: applied automatically for AMD/Radeon, Intel, low-memory,
+   slow-connection, and medium-tier machines. It keeps the design readable while
+   removing the most expensive paint/compositing work. */
+.performance-mode *,
+.performance-mode *::before,
+.performance-mode *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.12s !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+
+.performance-mode .backdrop-blur,
+.performance-mode .backdrop-blur-sm,
+.performance-mode .backdrop-blur-md,
+.performance-mode .backdrop-blur-lg,
+.performance-mode .backdrop-blur-xl,
+.performance-mode .glass-card,
+.performance-mode .glass-card-hover,
+.performance-mode .glass-pill {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.performance-mode .blur-\[200px\],
+.performance-mode .blur-\[160px\],
+.performance-mode .blur-\[120px\],
+.performance-mode .blur-\[100px\],
+.performance-mode .blur-\[90px\],
+.performance-mode .blur-\[80px\] {
+  filter: blur(24px) !important;
+}
+
+.performance-mode video {
+  display: none !important;
+}
+
+.performance-mode .site-root section {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+  contain: layout paint style;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   P1 — PERFORMANCE & MICRO-INTERACTIONS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── GPU acceleration hints for heavy animated elements ─────────────────── */
+.hero-orb-1,
+.hero-orb-2,
+.hero-orb-3 {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+.hero-card-float,
+.hero-float-badge {
+  will-change: transform;
+}
+
+/* ─── Touch targets — minimum 44×44px for all interactive elements ────────── */
+@media (pointer: coarse) {
+  button, [role="button"], a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Comfortable touch spacing for nav links */
+  nav button {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+}
+
+/* ─── touch-action: manipulation removes 300ms tap delay ─────────────────── */
+button,
+[role="button"],
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/* ─── content-visibility: auto — REMOVED ─────────────────────────────────── */
+/*
+ * content-visibility: auto was causing sections to not render in Safari and
+ * fast-scrolling scenarios (browser treats "off-screen" too aggressively).
+ * Performance is already handled by React lazy() + Suspense code-splitting.
+ */
+
+/* ─── Accent line animation — scaleX reveal on scroll ────────────────────── */
+.accent-line-animated {
+  transform-origin: left center;
+  animation: accentReveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-play-state: paused;
+}
+
+.accent-line-animated.is-visible {
+  animation-play-state: running;
+}
+
+@keyframes accentReveal {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* ─── Micro-interaction: button press feedback ────────────────────────────── */
+button:active:not([disabled]) {
+  transform: scale(0.97);
+  transition: transform 0.08s ease;
+}
+
+/* ─── Smooth image rendering ─────────────────────────────────────────────── */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ─── WebM video GPU layer promotion ─────────────────────────────────────── */
+video {
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+/* animated-icon-ring / animated-icon-orbit — covered by universal reduced-motion rule above */
