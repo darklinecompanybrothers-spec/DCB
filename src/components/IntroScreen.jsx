@@ -252,9 +252,9 @@ const IntroScreen = ({ onEnter, lang = 'fr', setLang }) => {
         className="absolute top-10 md:top-14 left-0 w-full z-20 flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 px-4"
       >
         <img
-          src="/dcb-logo1.png"
+          src="dcb-logo1.png"
           alt="DCB Logo"
-          className="h-12 sm:h-16 md:h-24 w-auto object-contain transition-all duration-700 drop-shadow-[0_0_15px_rgba(168,85,247,0.4)] logo-electric"
+          className="h-12 sm:h-16 md:h-24 w-auto object-contain transition-all duration-700 drop-shadow-[0_0_15px_rgba(168,43,226,0.4)] logo-electric"
         />
         <div className="text-base sm:text-2xl md:text-4xl font-black tracking-tighter text-white text-center logo-electric">
           DCB <span className="text-purple-500">AUTHORITY</span> GROUP
@@ -314,7 +314,7 @@ const IntroScreen = ({ onEnter, lang = 'fr', setLang }) => {
         <div className="hidden sm:flex relative z-10 w-full lg:w-1/2 justify-center">
           <div className="relative w-full min-h-[50vh] lg:min-h-[80vh] flex flex-col items-center justify-center pt-6 pb-6 sm:pt-12 sm:pb-12 lg:pt-20 lg:pb-20 overflow-hidden">
             <motion.img
-              src="/two-hands.png"
+              src="two-hands.png"
               alt="Mains tenant la carte DCB"
               className="w-full h-auto block object-cover pointer-events-none select-none drop-shadow-2xl"
               initial={{ opacity: 0, scale: 0.95 }}

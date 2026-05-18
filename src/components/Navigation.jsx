@@ -237,7 +237,7 @@ const Navigation = ({ onNavigate, currentPage, currentSection, lang, setLang }) 
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  src="/dcb-logo1.png"
+                  src="dcb-logo1.png"
                   alt="DCB Logo"
                   className="h-8 md:h-12 w-auto object-contain transition-all duration-500 group-hover:drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]"
                 />

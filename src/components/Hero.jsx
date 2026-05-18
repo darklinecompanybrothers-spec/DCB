@@ -164,7 +164,7 @@ const BusinessCard = () => {
 
           {/* Logo + brand */}
           <div className="absolute top-5 left-5 flex items-center gap-2.5">
-            <img loading="lazy" src="/dcb-logo1.png" alt="DCB" className="h-9 w-auto object-contain drop-shadow-[0_0_8px_rgba(138,43,226,0.6)]" />
+            <img loading="lazy" src="dcb-logo1.png" alt="DCB" className="h-9 w-auto object-contain drop-shadow-[0_0_8px_rgba(138,43,226,0.6)]" />
             <div>
               <p className="text-[10px] font-black tracking-[0.22em] text-white uppercase leading-none">DCB Authority</p>
               <p className="text-[8px] text-purple-400/70 tracking-[0.15em] uppercase mt-0.5">Group</p>

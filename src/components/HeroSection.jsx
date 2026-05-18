@@ -74,7 +74,7 @@ const HeroSection = ({ onNavigate, lang }) => {
         {useStaticHero ? (
           /* Slow connection (2G/3G) — static poster, no video download */
           <img
-            src="/hand.png"
+            src="hand.png"
             alt=""
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-contain opacity-45"
@@ -90,7 +90,7 @@ const HeroSection = ({ onNavigate, lang }) => {
           >
             {/* WebM first — better compression, supported in Chrome/Firefox/Edge */}
             {/* MP4 fallback — Safari + older browsers */}
-            <source src="/Hero-Video.mp4" type="video/mp4" />
+            <source src="Hero-Video.mp4" type="video/mp4" />
           </video>
         )}
       </motion.div>

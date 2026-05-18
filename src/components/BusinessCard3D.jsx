@@ -125,7 +125,7 @@ const CardFront = ({ name, role }) => (
       {/* Logo + Marque */}
       <div className="absolute top-5 left-5 flex items-center gap-3">
         <img loading="lazy"
-          src="/dcb-logo1.png"
+          src="dcb-logo1.png"
           alt="DCB"
           className="h-10 w-auto object-contain"
           style={{ filter: 'drop-shadow(0 0 10px rgba(138,43,226,0.7))' }}
@@ -221,7 +221,7 @@ const CardBack = () => (
     {/* Centre : identité de marque */}
     <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-2.5">
       <div className="w-[200px] h-[1px]" style={{ background: 'linear-gradient(90deg, transparent, rgba(138,43,226,0.8), rgba(0,212,255,0.6), transparent)' }} />
-      <img loading="lazy" src="/dcb-logo1.png" alt="DCB" className="h-8 w-auto object-contain opacity-80" style={{ filter: 'drop-shadow(0 0 8px rgba(138,43,226,0.5))' }} />
+      <img loading="lazy" src="dcb-logo1.png" alt="DCB" className="h-8 w-auto object-contain opacity-80" style={{ filter: 'drop-shadow(0 0 8px rgba(138,43,226,0.5))' }} />
       <p className="text-[12px] font-black tracking-[0.35em] text-white uppercase" style={{ fontFamily: "'Space Grotesk', sans-serif", textShadow: '0 0 18px rgba(138,43,226,0.75)' }}>
         DCB Authority Group
       </p>
