@@ -127,7 +127,7 @@ const GhostPlayer = ({ id, division, color }) => {
   const realRafRef    = useRef(null);
 
   useEffect(() => {
-    const audio = new Audio(`/tracks/ghost-${id}.mp3`);
+    const audio = new Audio(`tracks/ghost-${id}.mp3`);
     audio.preload = 'metadata';
     audio.onloadedmetadata = () => {
       realAudioRef.current = audio;
