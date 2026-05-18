@@ -1,0 +1,21 @@
+{
+  "name": "DCB Authority Group",
+  "short_name": "DCBAG",
+  "description": "The Trinity Creative Ecosystem — Studio · Visuals · Digital",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#050508",
+  "background_color": "#050508",
+  "icons": [
+    {
+      "src": "/dcb-logo1.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "fr"
+}

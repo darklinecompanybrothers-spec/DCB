@@ -1,0 +1,1 @@
+import{r as t}from"./react-vendor-BIfBhlZv.js";function f(n={}){const s=t.useRef(null),[o,u]=t.useState(!1);return t.useEffect(()=>{const e=s.current;if(!e)return;const r=new IntersectionObserver(([c])=>{c.isIntersecting&&(u(!0),r.unobserve(e))},{threshold:n.threshold||.12,rootMargin:"0px 0px -40px 0px"});return r.observe(e),()=>r.unobserve(e)},[]),{ref:s,vis:o}}export{f as u};
