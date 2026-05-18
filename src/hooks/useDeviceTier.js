@@ -1,22 +1,3 @@
-/**
- * useDeviceTier — Détection du niveau de performance de l'appareil.
- *
- * Retourne { isLowEnd, isMobile, prefersReducedMotion, isMediumTier, isAmdGpu }
- *
- * isLowEnd = true si l'un des critères suivants est détecté :
- *   • prefers-reduced-motion : reduce  (accessibilité + performance)
- *   • navigator.hardwareConcurrency < 4 (moins de 4 cœurs CPU)
- *   • navigator.connection.saveData = true (mode économie de données)
- *   • GPU/renderer connu pour mal supporter les effets lourds du site
- *
- * isMobile = window.innerWidth < 768 (proxy rapide, pas de resize listener)
- *
- * Décisions de dégradation recommandées par ItsLit :
- *   isLowEnd → OracleField: return null
- *   isLowEnd → AudioWave: step = 12 (canvas léger, pas SVG statique)
- *   isMobile && isLowEnd → CinematicCurtain: simple fade
- *   isMobile && isLowEnd → HeroSection video: afficher poster JPG uniquement
- */
 import { useMemo } from 'react';
 
 function getGpuRenderer() {
@@ -45,8 +26,20 @@ function getGpuRenderer() {
   }
 }
 
+function getPerformanceOverride() {
+  if (typeof window === 'undefined') return null;
+
+  const urlMode = new URLSearchParams(window.location.search).get('performance');
+  const storedMode = window.localStorage?.getItem('dcbPerformanceMode');
+  return urlMode || storedMode;
+}
+
 export default function useDeviceTier() {
   return useMemo(() => {
+    const overrideMode = getPerformanceOverride();
+    const forceFull = overrideMode === 'full' || overrideMode === 'heavy';
+    const forceLight = overrideMode === 'light' || overrideMode === 'lite';
+
     const prefersReducedMotion =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -56,10 +49,11 @@ export default function useDeviceTier() {
         ? (navigator.hardwareConcurrency ?? 4)
         : 4;
 
-    const memory =
-      typeof navigator !== 'undefined'
-        ? (navigator.deviceMemory ?? 4)
-        : 4;
+    const hasMemoryInfo =
+      typeof navigator !== 'undefined' &&
+      typeof navigator.deviceMemory === 'number';
+
+    const memory = hasMemoryInfo ? navigator.deviceMemory : Infinity;
 
     const saveData =
       typeof navigator !== 'undefined'
@@ -73,26 +67,27 @@ export default function useDeviceTier() {
 
     const isMobile =
       typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+    const isDesktop = !isMobile;
 
     const renderer = getGpuRenderer();
     const isAmdGpu = /amd|radeon|ati/.test(renderer);
     const isIntelGpu = /intel/.test(renderer);
     const slowConnection = ['slow-2g', '2g', '3g'].includes(connection);
 
-    const isMediumTier =
-      isMobile ||
-      cores <= 6 ||
-      memory <= 4 ||
-      isAmdGpu ||
-      isIntelGpu ||
-      slowConnection;
+    // Keep iPhone/mobile devices in the full experience unless the user/browser
+    // explicitly asks for reduced data or reduced motion.
+    const likelyWeakDesktopGpu = isDesktop && (isAmdGpu || isIntelGpu);
+    const weakDesktopSpecs = isDesktop && (cores <= 4 || memory <= 4);
 
-    const isLowEnd =
+    const autoLowEnd =
       prefersReducedMotion ||
       saveData ||
-      cores < 4 ||
-      memory < 4 ||
-      slowConnection;
+      slowConnection ||
+      (isDesktop && (cores < 4 || memory < 4));
+
+    const autoMediumTier = likelyWeakDesktopGpu || weakDesktopSpecs;
+    const isLowEnd = forceFull ? false : forceLight ? true : autoLowEnd;
+    const isMediumTier = forceFull ? false : forceLight ? true : autoMediumTier;
 
     return {
       isLowEnd,
@@ -101,6 +96,7 @@ export default function useDeviceTier() {
       isMediumTier,
       isAmdGpu,
       renderer,
+      performanceMode: isLowEnd || isMediumTier ? 'light' : 'full',
     };
   }, []);
 }
